@@ -1,23 +1,12 @@
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler
-import requests
-import re
+import os
+import telebot 
 
-def get_url():
-    contents = requests.get('https://random.dog/woof.json').json()    
-    url = contents['url']
-    return url
+bot = telebot.TeleBot("5159478561:AAEvHPhc13F0Bb1yIBESxv4-uecpV52n-U8")
 
-def bop(bot, update):
-    url = get_url()
-    chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=url)
+client.forward_messages(
+    chat_id=chat_id,
+    from_chat_id=message.chat.id,
+    message_ids=message.message_id
+)
 
-def main():
-    updater = Updater('5152724253:AAHeBjPWNsSCFVCbdHJTRQhoboVSt4c8jqE')
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler('bop',bop))
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+bot.polling()
